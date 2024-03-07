@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-r_interne = 600
+r_interne = 0
 i_s = 25 * (10 ** (-9))
 R = np.array([68, 200, 10000]) + r_interne
 V_D_mesure = np.array([0.883, 0.795, 0.618])
@@ -18,5 +18,5 @@ plt.plot(t, courbe_diode, "-g")
 
 
 plt.xlim([0, 2])
-plt.ylim([-(10 ** (-4)), 10 ** (-2)])
+plt.ylim([-(10 ** (-4)), 10 ** (-1)])
 plt.show()

@@ -1,0 +1,141 @@
+\documentclass{exam}
+\usepackage[a4paper,left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.5cm, footskip=0.5cm]{geometry}
+% Package langue
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+%Packages mathématiques
+\usepackage{amsmath, amsfonts}
+\usepackage{amssymb,amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+
+\usepackage{framed}
+\usepackage{tabularx}
+% Header
+\extraheadheight{.95in}
+\header{UCLouvain -- EPL \\
+        LEPL1502: \textsc{Projet 2}\\
+        Laboratoire  -- Q2 2023\\
+        [1pt]}{}{  Groupe: \fbox{\parbox[c][8mm][c]{50mm}{\centering 11.55}} \\ 
+         } 
+% Footer
+\usepackage{lastpage}
+\cfoot{\thepage /\ \pageref{LastPage}}
+
+%Packages Figures et graphiques
+\usepackage{graphicx} %inclusion de figures
+\usepackage{pgf,tikz}
+\usetikzlibrary{babel} %%% <--- Don't forget
+\usepackage[siunitx,american, RPvoltages]{circuitikz}
+\usepackage{caption}
+
+\begin{document}
+
+\begin{center}
+	\textbf{\huge Laboratoire 2 : Amplificateur opérationnel}
+\end{center}
+
+\section*{\textbf{\large Expérience 1 : Comparateur de tension }}
+Objectif de l'expérience : Le but de cette expérience est d’observer la tension de sortie $V_{out}$ du montage en comparateur de tension qui est dépendante de la différence entre les tensions d’entrées $V_{in+}$ et $V_{in-}$.
+\newline
+\begin{minipage}[t]{1\textwidth}
+	\begin{minipage}{0.5\textwidth}
+		\begin{framed}
+			\begin{minipage}[t][7cm][t]{1\textwidth}
+				\textbf{Circuits:}\\
+				\begin{circuitikz}
+					\ctikzset{bipoles/length=1cm}
+					\draw (0,0) node[op amp](A1){}
+					(A1.+) to [vsourcetri] ++(0, -2) coordinate(ground) to (ground-|A1.out) to [R] (A1.out)
+					(A1.down) to (A1.down|-ground)
+					(ground) node[ground]{} to ++(-2, 0) to [V=$DC$] ++(0, 4) coordinate(tmp) to (tmp-|A1.up) to (A1.up)
+					;
+				\end{circuitikz}
+			\end{minipage}
+		\end{framed}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}
+		\begin{framed}
+			\begin{minipage}[t][7cm][t]{1\textwidth}
+				\textbf{Équations et/ou courbes théoriques:}
+				\begin{align}
+					V_{th} = & V_0                                   \\
+					R_{th} = & R_1 \left(\frac{V_{th}}{V_1}-1\right)
+				\end{align}
+			\end{minipage}
+		\end{framed}
+	\end{minipage}
+\end{minipage}
+
+\begin{framed}
+	\begin{minipage}[t]{0.9\textwidth}
+		\textbf{Mode opératoire :}
+		Faire les mesures suivantes avec un signal carré de fréquence 1kHz et d’amplitude 1V avec un
+		offset de 1V (c-a-d un signal qui alterne entre 0 et 2 V).
+		\begin{enumerate}
+			\item Mesurer la tension $V_0$ dans le circuit représenté à la Figure 3a (circuit ouvert).
+			\item Mesurer la tension $V_1$ dans le circuit représenté à la Figure 3b pour quatre valeurs de $R_1$ entre
+			      200Ω et 800Ω.
+			\item Déterminer les valeur de $V_{th}$ et $R_{th}$ sur base de la mesure commune de $V_0$ et des différentes
+			      mesures de $V_1$ et de votre expression analytique.
+			\item Faire varier la fréquence du signal carré (vous pouvez garder la dernière résistance utilisée) et
+			      observer l’influence sur les mesures et les résultats.
+			\item Faire varier l’amplitude du signal carré et observer l’influence sur les mesures et les résultats.
+		\end{enumerate}
+	\end{minipage}
+\end{framed}
+\begin{framed}
+	\begin{minipage}[t]{0.9\textwidth}
+		\textbf{Observations :}\\
+		Pour un potentiel de $1V$ imposé (variation de $R_1$) :\\
+		\begin{center}
+			\begin{tabularx}{0.6\textwidth} {
+					| >{\centering\arraybackslash}X
+					| >{\centering\arraybackslash}X
+					| >{\centering\arraybackslash}X|}
+				\hline
+				$R_1~(\Omega)$ & $V_1~(mV)$ & $R_{th}$ déduit ($\Omega$) \\
+				\hline
+				200            & 245        & 616                        \\
+				\hline
+				400            & 395        & 613                        \\
+				\hline
+				600            & 505        & 588                        \\
+				\hline
+				800            & 575        & 591                        \\
+				\hline
+			\end{tabularx}\\
+		\end{center}
+		Pour une résistance de $800\Omega$ imposée (variation de $V_{th}$):\\
+		\begin{center}
+			\begin{tabularx}{0.6\textwidth} {
+					| >{\centering\arraybackslash}X
+					| >{\centering\arraybackslash}X
+					| >{\centering\arraybackslash}X|}
+				\hline
+				$V_0~(mV)$ & $V_1~(mV)$ & $R_{th}$ déduit ($\Omega$) \\
+				\hline
+				1000       & 564        & 618                        \\
+				\hline
+				800        & 453        & 612                        \\
+				\hline
+				600        & 339        & 613                        \\
+				\hline
+				400        & 224        & 628                        \\
+				\hline
+			\end{tabularx}\\
+		\end{center}
+		Pour des variations de fréquence, on n'observe pas de changement dans les tensions mesurées.
+
+	\end{minipage}
+\end{framed}
+\begin{framed}
+	\begin{minipage}[t]{\textwidth}
+		\textbf{Résultats : }
+		La résistance interne du picoscope vaut environ 600 $\Omega$.
+	\end{minipage}
+\end{framed}
+\end{document}
