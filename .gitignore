@@ -17,3 +17,4 @@
 *.dvi
 *.pdfsync
 *.synctex.gz\(busy\)
+.venv/*
