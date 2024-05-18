@@ -202,13 +202,13 @@ def plot_vertical_lines(
 
 
 plot_from_csv(
-    "labo5_100kHz_200ohm_exp1.csv",
-    "inductance_sinus.pdf",
-    -20,
-    20,
-    [r"$V_{R}$", r"$V_{s}$"],
-    "Tensions en fonction du temps ($100kHz$)",
-    time_scale="$\mu s$",
+    "data/labo3experience+-.csv",
+    "osc.pdf",
+    -100,
+    100,
+    [r"$V_{in+}$", r"$V_{in-}$"],
+    "Tensions à l'entrée de l'ampli-op au cours du temps",
+    time_scale="$\mu_s$",
     save_file=True,
     show_plot=True,
 )
