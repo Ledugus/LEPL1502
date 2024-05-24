@@ -6,11 +6,11 @@ from scipy.interpolate import interp1d
 
 
 # Internal functions (not-used for user input)
-def load_csv(file):
+def load_csv(file, delimiter=";"):
     # Load the CSV file
     df = pd.read_csv(
         file,
-        delimiter=";",
+        delimiter=delimiter,
         skiprows=1,  # Adjust if the actual column names are in a different row
     )
     return df
@@ -63,15 +63,15 @@ def plot_from_csv(
         raise ValueError("time_end can't be smaller than time_start")
 
     # Open file
-    df = load_csv(file_path)
+    df = load_csv(file_path, delimiter=",")
 
     # Count number of columns in file
-    num_col = count_csv_columns(file_path, delimiter=";")
+    num_col = count_csv_columns(file_path, delimiter=",")
     # replace all infinite values with NaN
     df.replace(["∞", "-∞"], 1000, inplace=True)
     # Convert columns to appropriate data types, replace commas with dots, and convert to numeric if needed
     for i in range(num_col):
-        df[df.columns[i]] = df[df.columns[i]].str.replace(",", ".").astype(float)
+        df[df.columns[i]] = df[df.columns[i]].astype(float)
     # Plot the data
     plt.figure(figsize=(10, 6))
 
@@ -202,13 +202,13 @@ def plot_vertical_lines(
 
 
 plot_from_csv(
-    "data/labo3experience+-.csv",
-    "osc.pdf",
-    -100,
-    100,
-    [r"$V_{in+}$", r"$V_{in-}$"],
-    "Tensions à l'entrée de l'ampli-op au cours du temps",
-    time_scale="$\mu_s$",
-    save_file=True,
+    "data/V_R_f_18.27_R68_C104.csv",
+    "edp.pdf",
+    -50,
+    50,
+    [r"$V_1(t)$", r"$V_{R1}$"],
+    "",
+    time_scale="$\mu s$",
+    save_file=False,
     show_plot=True,
 )
